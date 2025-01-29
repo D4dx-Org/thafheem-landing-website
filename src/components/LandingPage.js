@@ -180,7 +180,7 @@ const LandingPage = () => {
                 title: "Personalized Experience",
                 description: "Customize fonts, languages, themes, and audio options",
                 color: "bg-purple-500"
-              }
+              },
             ].map((feature, index) => (
               <div 
                 key={index}
