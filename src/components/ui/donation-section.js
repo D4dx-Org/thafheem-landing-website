@@ -43,7 +43,7 @@ const DonationSection = () => {
           {/* Donation Button */}
           <div className="text-center">
             <Button
-              onClick={() => window.open('https://support.thafheem.net', '_blank')}
+              onClick={() => window.open('https://pages.razorpay.com/thafheem-donation', '_blank')}
               className="px-8 py-4 text-lg"
             >
               <Heart className="w-5 h-5 mr-2" />
