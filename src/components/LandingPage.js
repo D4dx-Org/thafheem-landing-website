@@ -97,7 +97,7 @@ const LandingPage = () => {
               </div>
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
                 Discover the
-                <span className="text-[#57b8d0] block">c of Quran</span>
+                <span className="text-[#57b8d0] block">Wisdom of Quran</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                 Experience Maulana Maududi's renowned tafseer in a modern, 
