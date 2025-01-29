@@ -140,7 +140,7 @@ const LandingPage = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-[#57b8d0]/20 to-blue-500/20 rounded-full filter blur-3xl"></div>
               <div className="relative bg-white rounded-3xl shadow-2xl p-4 transform hover:rotate-2 transition-transform duration-500 max-w-sm mx-auto">
                 <img 
-                  src="/images/app-preview.png"
+                  src="/images/app-1.png"
                   alt="App Preview" 
                   className="w-full h-auto max-h-[600px] object-contain rounded-2xl"
                 />
@@ -294,6 +294,10 @@ const LandingPage = () => {
               </Button>
             </div>
           </div>
+          {/* Footer Credits */}
+<footer className="py-6 bg-gray-50">
+  <p className="text-center text-sm text-gray-600">© {new Date().getFullYear()} Thafheem ul Quran. Developed with ☕ by <a href="https://d4dx.co" target="_blank" rel="noopener noreferrer" className="text-[#57b8d0] hover:underline">D4DX</a></p>
+</footer>
         </div>
       </section>
     </div>
