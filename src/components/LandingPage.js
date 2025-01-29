@@ -69,7 +69,7 @@ const LandingPage = () => {
             <div className="md:w-1/2 relative z-10">
               <div className="inline-flex items-center bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full mb-6 text-sm text-gray-600">
                 <Star className="w-4 h-4 text-yellow-400 mr-2" />
-                Trusted by 10,000+ users worldwide
+                Trusted by 100,000+ users worldwide
               </div>
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
                 Discover the
