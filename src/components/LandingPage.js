@@ -23,6 +23,7 @@ import {
   Twitter
 } from 'lucide-react';
 import Button from './ui/Button';
+import DonationSection from './ui/donation-section';
 
 const LandingPage = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -96,7 +97,7 @@ const LandingPage = () => {
               </div>
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
                 Discover the
-                <span className="text-[#57b8d0] block">Wisdom of Quran</span>
+                <span className="text-[#57b8d0] block">c of Quran</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                 Experience Maulana Maududi's renowned tafseer in a modern, 
@@ -227,6 +228,9 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+      
+  {/* Donation Section */}
+  <DonationSection />
 
       {/* Social Proof Section */}
       <section id="testimonials" className="py-20 bg-white">

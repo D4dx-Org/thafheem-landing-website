@@ -6,3 +6,8 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
+
+/* Custom font classes */
+.font-arabic {
+  font-family: 'Amiri', serif;
+}
