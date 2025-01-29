@@ -15,8 +15,14 @@ import {
   Languages,
   Volume2,
   Bookmark,
-  Share2
+  Share2,
+  Globe,
+  Mail,
+  Facebook,
+  Instagram,
+  Twitter
 } from 'lucide-react';
+import Button from './ui/Button';
 
 const LandingPage = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -27,6 +33,13 @@ const LandingPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-blue-50">
       {/* Navigation */}
@@ -36,7 +49,7 @@ const LandingPage = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center transform transition-transform hover:rotate-12 overflow-hidden">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center transform transition-transform hover:rotate-12 overflow-hidden">
                 <img 
                   src="/images/logo.png"
                   alt="Thafheem Logo"
@@ -45,17 +58,27 @@ const LandingPage = () => {
               </div>
               <span className="text-gray-800 text-xl font-bold">Thafheem Ul Quran</span>
             </div>
-            <div className="hidden md:flex space-x-8">
-              {['Features', 'How It Works', 'Testimonials', 'FAQ'].map((item) => (
-                <a 
-                  key={item} 
-                  href={`#${item.toLowerCase().replace(' ', '-')}`}
+            <div className="hidden md:flex items-center space-x-8">
+              {[
+                { label: 'Features', id: 'features' },
+                { label: 'Languages', id: 'languages' },
+                { label: 'Testimonials', id: 'testimonials' }
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => scrollToSection(item.id)}
                   className="text-gray-600 hover:text-[#57b8d0] transition-colors flex items-center space-x-1 group"
                 >
-                  <span>{item}</span>
+                  <span>{item.label}</span>
                   <ChevronRight className="w-4 h-4 transform transition-transform group-hover:translate-x-1" />
-                </a>
+                </button>
               ))}
+              <Button
+                onClick={() => window.open('https://support.thafheem.net', '_blank')}
+                className="px-6 py-2"
+              >
+                Donate
+              </Button>
             </div>
           </div>
         </div>
@@ -80,40 +103,46 @@ const LandingPage = () => {
                 interactive interface designed for deep understanding.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="flex items-center justify-center space-x-3 bg-[#57b8d0] text-white px-8 py-4 rounded-xl hover:bg-[#4ca6bc] transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
-                  <Apple className="w-6 h-6" />
+                <Button
+                  onClick={() => window.open('https://apps.apple.com/in/app/thafheem-ul-quran/id1292572556', '_blank')}
+                  className="px-8 py-4"
+                >
+                  <Apple className="w-6 h-6 mr-3" />
                   <div className="text-left">
                     <div className="text-xs">Download on the</div>
                     <div className="font-semibold">App Store</div>
                   </div>
-                </button>
-                <button className="flex items-center justify-center space-x-3 bg-gray-900 text-white px-8 py-4 rounded-xl hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
-                  <PlayCircle className="w-6 h-6" />
+                </Button>
+                <Button
+                  onClick={() => window.open('https://play.google.com/store/apps/details?id=com.d4media.thafheem', '_blank')}
+                  className="px-8 py-4 bg-gray-900 hover:bg-gray-800"
+                >
+                  <PlayCircle className="w-6 h-6 mr-3" />
                   <div className="text-left">
                     <div className="text-xs">Get it on</div>
                     <div className="font-semibold">Google Play</div>
                   </div>
-                </button>
+                </Button>
+                <Button
+                  onClick={() => window.open('https://thafheem.net', '_blank')}
+                  className="px-8 py-4 bg-blue-600 hover:bg-blue-700"
+                >
+                  <Globe className="w-6 h-6 mr-3" />
+                  <div className="text-left">
+                    <div className="text-xs">Continue with</div>
+                    <div className="font-semibold">Web Read</div>
+                  </div>
+                </Button>
               </div>
             </div>
             <div className="md:w-1/2 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#57b8d0]/20 to-blue-500/20 rounded-full filter blur-3xl"></div>
-            <div className="relative bg-white rounded-3xl shadow-2xl p-4 transform hover:rotate-2 transition-transform duration-500 max-w-sm mx-auto">
-            <img 
+              <div className="absolute inset-0 bg-gradient-to-r from-[#57b8d0]/20 to-blue-500/20 rounded-full filter blur-3xl"></div>
+              <div className="relative bg-white rounded-3xl shadow-2xl p-4 transform hover:rotate-2 transition-transform duration-500 max-w-sm mx-auto">
+                <img 
                   src="/images/app-preview.png"
                   alt="App Preview" 
                   className="w-full h-auto max-h-[600px] object-contain rounded-2xl"
                 />
-                <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white px-6 py-3 rounded-full shadow-lg flex items-center space-x-4">
-                  <div className="flex -space-x-2">
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center">
-                        <Heart className="w-4 h-4 text-[#57b8d0]" />
-                      </div>
-                    ))}
-                  </div>
-                  <span className="text-sm font-medium text-gray-600">Loved by thousands</span>
-                </div>
               </div>
             </div>
           </div>
@@ -121,7 +150,7 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white relative">
+      <section id="features" className="py-20 bg-white relative">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -167,54 +196,32 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-20 bg-gray-50">
+      {/* Language Support Section */}
+      <section id="languages" className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">
-            Simple Steps to Get Started
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Multilingual Support
+            </h2>
+            <p className="text-gray-600">
+              Access the Quran in multiple languages for better understanding
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {[
-              {
-                step: "1",
-                title: "Download",
-                description: "Get the app from your preferred store",
-                icon: <Download className="w-6 h-6" />
-              },
-              {
-                step: "2",
-                title: "Sign Up",
-                description: "Create your account in seconds",
-                icon: <BookOpen className="w-6 h-6" />
-              },
-              {
-                step: "3",
-                title: "Explore",
-                description: "Browse through the Quran and tafseer",
-                icon: <Bookmark className="w-6 h-6" />
-              },
-              {
-                step: "4",
-                title: "Share",
-                description: "Share insights with others",
-                icon: <Share2 className="w-6 h-6" />
-              }
-            ].map((step, index) => (
-              <div key={index} className="relative">
-                <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all">
-                  <div className="w-12 h-12 bg-[#57b8d0] rounded-full flex items-center justify-center text-white font-bold mb-6">
-                    {step.step}
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{step.title}</h3>
-                  <p className="text-gray-600">{step.description}</p>
-                  <div className="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2">
-                    {index < 3 && (
-                      <div className="hidden md:block w-8 h-8 bg-[#57b8d0]/10 rounded-full flex items-center justify-center">
-                        <ChevronRight className="w-4 h-4 text-[#57b8d0]" />
-                      </div>
-                    )}
-                  </div>
-                </div>
+              { lang: "മലയാളം", code: "Malayalam" },
+              { lang: "اردو", code: "Urdu" },
+              { lang: "தமிழ்", code: "Tamil" },
+              { lang: "English", code: "English" },
+              { lang: "বাংলা", code: "Bengali" },
+              { lang: "हिंदी", code: "Hindi" }
+            ].map((lang, index) => (
+              <div 
+                key={index}
+                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 text-center"
+              >
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{lang.lang}</h3>
+                <p className="text-gray-600">{lang.code}</p>
               </div>
             ))}
           </div>
@@ -222,17 +229,18 @@ const LandingPage = () => {
       </section>
 
       {/* Social Proof Section */}
-      <section className="py-20 bg-white">
+      <section id="testimonials" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-16">
             <div className="flex -space-x-2 mb-4">
               {[...Array(5)].map((_, i) => (
                 <div key={i} className="w-12 h-12 rounded-full bg-gray-200 border-4 border-white">
- <img 
+                  <img 
                     src={`/images/user${i + 1}.png`} 
                     alt={`User ${i + 1}`} 
                     className="w-full h-full object-cover rounded-full"
-                  />                </div>
+                  />
+                </div>
               ))}
             </div>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -246,6 +254,41 @@ const LandingPage = () => {
             <p className="text-gray-600">
               Join thousands of satisfied users exploring the Quran with Thafheem
             </p>
+          </div>
+
+          {/* Contact and Social Links */}
+          <div className="flex flex-col items-center space-y-8">
+            <Button
+              onClick={() => window.location.href = 'mailto:support@thafheem.net'}
+              className="px-6 py-3"
+            >
+              <Mail className="w-5 h-5 mr-2" />
+              <span>Contact Support</span>
+            </Button>
+
+            <div className="flex space-x-6">
+              <Button
+                onClick={() => window.open('https://facebook.com/thafheemulquran', '_blank')}
+                variant="ghost"
+                className="w-12 h-12 rounded-full p-0"
+              >
+                <Facebook className="w-6 h-6 text-blue-600" />
+              </Button>
+              <Button
+                onClick={() => window.open('https://instagram.com/thafheemulquran', '_blank')}
+                variant="ghost"
+                className="w-12 h-12 rounded-full p-0"
+              >
+                <Instagram className="w-6 h-6 text-pink-600" />
+              </Button>
+              <Button
+                onClick={() => window.open('https://x.com/thafheemulquran', '_blank')}
+                variant="ghost"
+                className="w-12 h-12 rounded-full p-0"
+              >
+                <Twitter className="w-6 h-6 text-gray-800" />
+              </Button>
+            </div>
           </div>
         </div>
       </section>
