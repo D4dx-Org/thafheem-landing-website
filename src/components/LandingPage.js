@@ -250,6 +250,8 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+            {/* Donation Section */}
+            <DonationSection />
       {/* Features Section */}
       <section id="features" className="py-20 bg-white relative">
         <div className="container mx-auto px-6">
