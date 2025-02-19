@@ -366,7 +366,7 @@ const LandingPage = () => {
           {/* Footer Credits */}
           <footer className="py-6 bg-gray-50">
             <p className="text-center text-sm text-gray-600">
-              © {new Date().getFullYear()} Thafheem ul Quran. Developed with by{" "}
+              © {new Date().getFullYear()} Thafheem ul Quran. Developed by{" "}
               <a
                 href="https://d4dx.co"
                 target="_blank"

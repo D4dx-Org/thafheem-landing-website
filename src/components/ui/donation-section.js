@@ -10,10 +10,10 @@ const DonationSection = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Support Tafheem ul Quran
+              Help Tafheem ul Quran
             </h2>
             <p className="text-lg text-gray-600">
-              Join us in spreading the understanding of Allah's words through your generous contribution
+            Help this great cause by setting aside a portion of your Zakat and Sadaqah
             </p>
           </div>
 
@@ -26,12 +26,12 @@ const DonationSection = () => {
 
             {/* English Translation */}
             <p className="text-xl text-center text-gray-800 mb-6 italic">
-              "Who is it that would loan Allah a goodly loan so He will multiply it for him and he will have a noble reward?"
+              "Who is it that will give Allah a beautiful loan? A loan that Allah will repay after increasing it many times and grant him a generous reward."
             </p>
 
             {/* Malayalam Translation */}
             <p className="text-lg text-center text-gray-600 mb-6">
-              അല്ലാഹുവിന് കടം കൊടുക്കുന്നവരാരുണ്ട്? വിശിഷ്ടമായ കടം, അല്ലാഹു അത് പലമടങ്ങ് വർധിപ്പിച്ചു തിരിച്ചേകും. അപ്രകാരം കടം കൊടുക്കുന്നവന് ശ്രേഷ്ഠമായ പ്രതിഫലവുമുണ്ട്
+            അല്ലാഹുവിന് കടം കൊടുക്കുന്നവരാരുണ്ട്? വിശിഷ്ടമായ കടം; അല്ലാഹു അത് പലയിരട്ടി വര്‍ധിപ്പിച്ചു തിരിച്ചേകാന്‍. അപ്രകാരം കടം കൊടുക്കുന്നവന്ന് ശ്രേഷ്ഠമായ പ്രതിഫലവുമുണ്ട്.
             </p>
 
             {/* Reference */}
