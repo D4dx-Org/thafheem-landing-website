@@ -332,7 +332,7 @@ const LandingPage = () => {
 
           {/* Contact and Social Links */}
           <div className="flex flex-col items-center space-y-8">
-            <Button onClick={() => (window.location.href = "mailto:support@thafheem.net")} className="px-6 py-3">
+            <Button onClick={() => (window.location.href = "mailto:info@d4media.in")} className="px-6 py-3">
               <Mail className="w-5 h-5 mr-2" />
               <span>Contact Support</span>
             </Button>
