@@ -305,8 +305,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Donation Section */}
-      <DonationSection />
+
 
       {/* Social Proof Section */}
       <section id="testimonials" className="py-20 bg-white">
