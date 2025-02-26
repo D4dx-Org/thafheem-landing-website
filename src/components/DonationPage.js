@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heart, Smartphone, Book, HandHeart, Globe } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => (
   <header className="bg-[#2B4C8C] py-8 px-4 text-center mb-12">
@@ -33,17 +34,25 @@ const QuoteCard = () => (
   </div>
 );
 
-const DonateButton = () => (
-  <div className="text-center">
-    <a
-      href="https://rzp.io/rzp/thafheem-donation"
-      className="inline-flex items-center gap-2 bg-blue-500 text-white px-10 py-3 rounded-md font-medium text-lg hover:bg-blue-600 transition-all shadow-md hover:-translate-y-0.5"
-    >
-      <Heart size={20} />
-      Donate Now
-    </a>
-  </div>
-);
+const DonateButton = () => {
+  const navigate = useNavigate();
+
+  const handleDonateClick = () => {
+    navigate('/payment');
+  };
+
+  return (
+    <div className="text-center">
+      <button
+        onClick={handleDonateClick}
+        className="inline-flex items-center gap-2 bg-blue-500 text-white px-10 py-3 rounded-md font-medium text-lg hover:bg-blue-600 transition-all shadow-md hover:-translate-y-0.5"
+      >
+        <Heart size={20} />
+        Donate Now
+      </button>
+    </div>
+  );
+};
 
 const BenefitCard = ({ icon: Icon, title, description }) => (
   <div className="bg-white p-8 rounded-lg text-center shadow-sm">

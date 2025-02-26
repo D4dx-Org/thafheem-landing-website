@@ -1,8 +1,15 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 import Button from './Button';
+import { useNavigate } from 'react-router-dom';
 
 const DonationSection = () => {
+  const navigate = useNavigate();
+
+  const handleDonateClick = () => {
+    navigate('/payment');
+  };
+
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
@@ -43,7 +50,7 @@ const DonationSection = () => {
           {/* Donation Button */}
           <div className="text-center">
             <Button
-              onClick={() => window.open('https://pages.razorpay.com/thafheem-donation', '_blank')}
+              onClick={handleDonateClick}
               className="px-8 py-4 text-lg"
             >
               <Heart className="w-5 h-5 mr-2" />

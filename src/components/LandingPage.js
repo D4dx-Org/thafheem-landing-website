@@ -24,6 +24,7 @@ import {
 } from "lucide-react"
 import Button from "./ui/Button"
 import DonationSection from "./ui/donation-section"
+import { useNavigate } from 'react-router-dom'
 
 const LandingPage = () => {
   const [scrollY, setScrollY] = useState(0)
@@ -96,6 +97,8 @@ const LandingPage = () => {
     },
   ]
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener("scroll", handleScroll)
@@ -121,6 +124,10 @@ const LandingPage = () => {
     const interval = setInterval(nextImage, 5000) // Auto-advance every 5 seconds
     return () => clearInterval(interval)
   }, [])
+
+  const handleDonateClick = () => {
+    navigate('/payment')
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-blue-50">
@@ -154,7 +161,7 @@ const LandingPage = () => {
                 </button>
               ))}
               <Button
-                onClick={() => window.open("https://pages.razorpay.com/thafheem-donation", "_blank")}
+                onClick={handleDonateClick}
                 className="px-6 py-2"
               >
                 Donate
