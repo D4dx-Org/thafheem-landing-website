@@ -66,7 +66,7 @@ const RazorpayPayment = () => {
 
     script.onload = () => {
       const options = {
-        key: 'rzp_live_U61uNmNxNX1FQA',
+        key: process.env.REACT_APP_RAZORPAY_KEY,
         amount: amount * 100,
         currency: 'INR',
         name: 'Thafheem Ul Quran',
