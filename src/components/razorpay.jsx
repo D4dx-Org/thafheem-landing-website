@@ -70,16 +70,16 @@ const RazorpayPayment = () => {
         amount: amount * 100,
         currency: 'INR',
         name: 'Thafheem Ul Quran',
-        description: 'Donation Payment',
+        description: 'Thafheem-Payment',
         handler: async function(response) {
           // Prepare payment data
           const paymentData = {
-            amount: amount,
+            amount: parseFloat(amount),
             email: email,
-            phoneNumber: `${countryCode}${phone}`,
-            transactionId: response.razorpay_payment_id,
-            timestamp: new Date().toISOString(),
-            paymentStatus: 'success'
+            phone_number: `${countryCode}${phone}`,
+            transaction_id: response.razorpay_payment_id,
+            payment_timestamp: new Date().toISOString(),
+            status: 'success'
           };
 
           try {
@@ -87,7 +87,7 @@ const RazorpayPayment = () => {
             const apiResponse = await fetch('https://directus.d4dx.co/items/thafheem_donation_list', {
               method: 'POST',
               headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
               },
               body: JSON.stringify(paymentData)
             });
@@ -95,7 +95,8 @@ const RazorpayPayment = () => {
             if (apiResponse.ok) {
               alert('Payment Successful! Transaction ID: ' + response.razorpay_payment_id);
             } else {
-              console.error('Failed to save payment data');
+              const errorData = await apiResponse.json();
+              console.error('API Error:', errorData);
               alert('Payment successful but failed to save details. Please contact support with Transaction ID: ' + response.razorpay_payment_id);
             }
           } catch (error) {
@@ -135,22 +136,24 @@ const RazorpayPayment = () => {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-br from-white to-blue-50 flex items-center justify-center px-4">
-      <div className="max-w-[500px] w-full bg-white rounded-2xl shadow-lg p-6">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+    <div className="min-h-screen bg-gradient-to-br from-white to-blue-50 flex items-center justify-center p-4 sm:p-6">
+      <div className="w-full max-w-[500px] bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
+        {/* Header Section */}
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
             Help Tafheem Ul Quran
           </h2>
-          <p className="text-base text-gray-600">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 px-2">
             Help this great cause by setting aside a portion of your Zakat and Sadaqah
           </p>
         </div>
         
-        <div className="grid grid-cols-3 gap-3 mb-4">
+        {/* Amount Buttons */}
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6">
           {predefinedAmounts.map((amt) => (
             <button
               key={amt}
-              className={`py-2.5 px-4 rounded-xl border-2 transition-all
+              className={`py-2 sm:py-2.5 md:py-3 px-2 sm:px-3 md:px-4 rounded-xl border-2 transition-all text-sm sm:text-base
                 ${amount === amt.toString() 
                   ? 'bg-[#57b8d0] text-white border-[#57b8d0]' 
                   : 'border-[#57b8d0] text-[#57b8d0] hover:bg-[#57b8d0] hover:text-white'}`}
@@ -161,9 +164,10 @@ const RazorpayPayment = () => {
           ))}
         </div>
 
-        <div className="flex gap-3 mb-8">
+        {/* Custom Amount Section */}
+        <div className="flex gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8">
           <button 
-            className={`py-2.5 px-4 rounded-xl border-2 transition-all w-1/3
+            className={`py-2 sm:py-2.5 md:py-3 px-2 sm:px-3 md:px-4 rounded-xl border-2 transition-all w-1/3 text-sm sm:text-base
               ${amount === '2000' 
                 ? 'bg-[#57b8d0] text-white border-[#57b8d0]' 
                 : 'border-[#57b8d0] text-[#57b8d0] hover:bg-[#57b8d0] hover:text-white'}`}
@@ -172,27 +176,21 @@ const RazorpayPayment = () => {
             ₹2000
           </button>
           <div className="flex flex-2 border-2 rounded-xl overflow-hidden w-2/3">
-            <span className="px-4 py-2.5 bg-gray-50 text-gray-600 border-r">INR</span>
+            <span className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 bg-gray-50 text-gray-600 border-r text-sm sm:text-base">INR</span>
             <input
               type="text"
               value={amount}
               onChange={handleAmountChange}
               placeholder="Enter Amount"
-              className="flex-1 px-4 py-2.5 outline-none"
+              className="flex-1 px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 outline-none text-sm sm:text-base w-full"
             />
           </div>
         </div>
 
-        {/* Add error message when amount is invalid */}
-        {amount && !isValidAmount() && (
-          <p className="text-red-500 text-sm text-center mb-4">
-            Please enter a valid amount
-          </p>
-        )}
-
-        <div className="space-y-6 mb-8">
+        {/* Contact Details */}
+        <div className="space-y-4 sm:space-y-5 md:space-y-6 mb-6 sm:mb-8">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
               Email Address
             </label>
             <input
@@ -201,41 +199,37 @@ const RazorpayPayment = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
-              className={`w-full px-4 py-2.5 rounded-xl border-2 focus:outline-none transition-colors ${
+              className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 rounded-xl border-2 focus:outline-none transition-colors text-sm sm:text-base ${
                 email && !isValidEmail() 
                   ? 'border-red-500 focus:border-red-500' 
                   : 'border-gray-200 focus:border-[#57b8d0]'
               }`}
             />
             {email && !isValidEmail() && (
-              <p className="text-red-500 text-sm mt-1">Please enter a valid email address</p>
+              <p className="text-red-500 text-xs sm:text-sm mt-1">Please enter a valid email address</p>
             )}
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
               Phone Number
             </label>
-            <div className="flex gap-2">
+            <div className="flex gap-2 sm:gap-3">
               <select
                 value={countryCode}
                 onChange={(e) => setCountryCode(e.target.value)}
-                className="w-24 px-3 py-2.5 rounded-xl border-2 focus:outline-none focus:border-[#57b8d0] transition-colors bg-white appearance-none text-center"
+                className="min-w-[80px] w-[80px] sm:w-[100px] md:w-[120px] px-1 sm:px-2 py-2 sm:py-2.5 md:py-3 rounded-xl border-2 focus:outline-none focus:border-[#57b8d0] transition-colors bg-white appearance-none text-center text-xs sm:text-sm md:text-base"
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23666666'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
                   backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'right 0.5rem center',
-                  backgroundSize: '1.5em 1.5em',
-                  paddingRight: '2.5rem'
+                  backgroundPosition: 'right 0.25rem center',
+                  backgroundSize: '1.2em 1.2em',
+                  paddingRight: '1.5rem'
                 }}
               >
                 {countryList.map((country) => (
-                  <option 
-                    key={country.code} 
-                    value={country.code}
-                    className="text-left"
-                  >
-                    {country.code} - {country.name}
+                  <option key={country.code} value={country.code}>
+                    {country.code}
                   </option>
                 ))}
               </select>
@@ -247,7 +241,7 @@ const RazorpayPayment = () => {
                 pattern="[0-9]*"
                 maxLength="10"
                 required
-                className={`flex-1 px-4 py-2.5 rounded-xl border-2 focus:outline-none transition-colors ${
+                className={`flex-1 min-w-0 px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-xl border-2 focus:outline-none transition-colors text-xs sm:text-sm md:text-base ${
                   phone && !isValidPhone() 
                     ? 'border-red-500 focus:border-red-500' 
                     : 'border-gray-200 focus:border-[#57b8d0]'
@@ -255,13 +249,14 @@ const RazorpayPayment = () => {
               />
             </div>
             {phone && !isValidPhone() && (
-              <p className="text-red-500 text-sm mt-1">Please enter a valid 10-digit phone number</p>
+              <p className="text-red-500 text-xs sm:text-sm mt-1">Please enter a valid 10-digit phone number</p>
             )}
           </div>
         </div>
 
+        {/* Payment Button */}
         <button 
-          className={`w-full py-3 text-white rounded-xl transition-colors font-medium text-lg mb-4 ${
+          className={`w-full py-2.5 sm:py-3 md:py-4 text-white rounded-xl transition-colors font-medium text-base sm:text-lg mb-4 sm:mb-6 ${
             isFormValid() 
               ? 'bg-[#57b8d0] hover:bg-[#4ca6bc] cursor-pointer' 
               : 'bg-gray-400 cursor-not-allowed'
@@ -272,24 +267,25 @@ const RazorpayPayment = () => {
           Proceed to Pay {amount ? `₹${amount}` : ''}
         </button>
 
-        <div className="text-center space-y-3">
-          <p className="text-sm text-gray-600">Contact Support for any issues</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <button
-              onClick={() => (window.location.href = "mailto:info@d4media.in")}
-              className="w-full sm:w-auto inline-flex items-center justify-center text-gray-600 hover:text-[#57b8d0] transition-colors text-sm px-4 py-2 rounded-lg hover:bg-gray-50 border border-gray-200"
+        {/* Support Section */}
+        <div className="text-center space-y-2 sm:space-y-3">
+          <p className="text-xs sm:text-sm text-gray-600">Contact Support for any issues</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+            <a
+              href="mailto:info@d4media.in"
+              className="w-full sm:w-auto inline-flex items-center justify-center text-gray-600 hover:text-[#57b8d0] transition-colors text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-gray-50 border border-gray-200"
             >
-              <Mail className="w-4 h-4 mr-2 flex-shrink-0" />
+              <Mail className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 flex-shrink-0" />
               <span>Email Support</span>
-            </button>
+            </a>
             <div className="hidden sm:block h-4 w-px bg-gray-300"></div>
-            <button
-              onClick={() => (window.location.href = "tel:+919946666139")}
-              className="w-full sm:w-auto inline-flex items-center justify-center text-gray-600 hover:text-[#57b8d0] transition-colors text-sm px-4 py-2 rounded-lg hover:bg-gray-50 border border-gray-200"
+            <a
+              href="tel:+919946666139"
+              className="w-full sm:w-auto inline-flex items-center justify-center text-gray-600 hover:text-[#57b8d0] transition-colors text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-gray-50 border border-gray-200"
             >
-              <Phone className="w-4 h-4 mr-2 flex-shrink-0" />
+              <Phone className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 flex-shrink-0" />
               <span className="whitespace-nowrap">+91 99466 66139</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>
